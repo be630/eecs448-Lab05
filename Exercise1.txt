@@ -1,1 +1,3 @@
 Preparing to create the tables in part one, plus do my first push so the github project isnt empty.
+
+Update 1: Practiced using the commands. Since i did this from home using windows, i had to figure out how to use the mysql commands. It turns out it was easier for me to use the XAMPP 'console'
