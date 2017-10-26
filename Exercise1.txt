@@ -1,3 +1,11 @@
 Preparing to create the tables in part one, plus do my first push so the github project isnt empty.
 
 Update 1: Practiced using the commands. Since i did this from home using windows, i had to figure out how to use the mysql commands. It turns out it was easier for me to use the XAMPP 'console'
+
+For the Users table, i used: 
+
+CREATE TABLE Users ( user_id varchar(255) NOT NULL, username text NOT NULL, PRIMARY KEY (user_id) );
+
+For the Posts table, i used:
+
+CREATE TABLE Posts ( post_id int NOT NULL AUTO_INCREMENT, content text NOT NULL, author_id int NOT NULL, PRIMARY KEY (post_id), FOREIGN KEY (author_id) REFERENCES users (user_id) );
