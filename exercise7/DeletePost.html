@@ -1,0 +1,37 @@
+<html>
+	<body>
+		<?php
+			$data_base = new mysqli("mysql.eecs.ku.edu", "bedmondson", 'P@$$word.123', "bedmondson");
+	
+			if($data_base->connect_errno)
+			{
+				printf("Unable to reach server: %s\n", $data_base->connect_error);
+				exit();
+			}
+			
+			$posts = $data_base->query("SELECT * FROM Posts");
+			
+			if($posts->num_rows == 0)
+			{
+				echo "No Posts to display";
+				//add exit
+			}
+			else
+			{
+				echo "<form action='DeletePost.php' method='post'>";
+				echo "<table><th>Post</th><th> Author </th><th>Delete?</th>";
+				
+				while($row = mysqli_fetch_array($posts))
+				{
+					$temp = $data_base->query("SELECT username FROM Users WHERE user_id='" . $row['author_id'] . "'");
+					$author = $temp->fetch_assoc();
+					echo "<tr><td>" . $row['content'] . "</td><td>" . $author['username'] . "</td><td>" . "<input type='checkbox' name='" . $row['post_id'] . "'></input></td></tr>";
+				}
+				
+				echo "</table><br><button type='submit'>Submit</button></form>";
+			}
+			
+			$data_base->close();
+		?>
+	</body>
+</html>
