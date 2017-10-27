@@ -1,6 +1,7 @@
 <?php
+	echo "<html><body>";
 
-	$new_username = $_POST["username"];
+	$newUsername = $_POST["username"];
 	
 	$data_base = new mysqli("mysql.eecs.ku.edu", "bedmondson", 'P@$$word.123', "bedmondson");
 	
@@ -10,14 +11,14 @@
 		exit();
 	}
 	
-	if(strlen($new_username) == 0)
+	if(strlen($newUsername) == 0)
 	{
 		echo "Username was blank. Try again.";
 		//add main page exit later.
 		exit();
 	}
 	
-	$check_string = "SELECT user_id FROM Users WHERE user_id='$new_username'";
+	$check_string = "SELECT user_id FROM Users WHERE user_id='$newUsername'";
 	$check_name = $data_base->query($check_string);
 	
 	if($check_name->num_rows != 0)
@@ -29,7 +30,7 @@
 	}
 	else
 	{
-		$new_add = "INSERT INTO Users (user_id) VALUES ('$new_username')";
+		$new_add = "INSERT INTO Users (user_id) VALUES ('$newUsername')";
 		if($data_base->query($new_add) == true)
 		{
 			echo "Username created!<br>";
@@ -40,5 +41,7 @@
 		}
 		
 		$data_base->close();
+		//add a page link here later
+		echo "</body></html>";
 	}	
 ?>
