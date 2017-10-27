@@ -19,4 +19,27 @@
 	
 	$check_string = "SELECT user_id FROM Users WHERE user_id='$new_username'";
 	$check_name = $data_base->query($check_string);
+	
+	if($check_name->num_rows != 0)
+	{
+		echo "Username unavailable, please choose another one<br>";
+		//add main page link later.
+		$check_name->free();
+		exit();
+	}
+	else
+	{
+		$new_add = "INSERT INTO Users (user_id) VALUES ('$new_username')";
+		
+		if($data_base->($new_add) == true)
+		{
+			echo "Username created!<br>";
+		}
+		else
+		{
+			echo "Something went wrong: " . $data_base->error;
+		}
+		
+		$data_base->close();
+	}	
 ?>
