@@ -30,8 +30,7 @@
 	else
 	{
 		$new_add = "INSERT INTO Users (user_id) VALUES ('$new_username')";
-		
-		if($data_base->($new_add) == true)
+		if($data_base->query($new_add) == true)
 		{
 			echo "Username created!<br>";
 		}
