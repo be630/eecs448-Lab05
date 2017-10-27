@@ -1,0 +1,44 @@
+<html>
+	<head>
+		<title> View User Posts </title>
+	</head>
+
+	<body>
+		<?php
+			$data_base = new mysqli("mysql.eecs.ku.edu", "bedmondson", 'P@$$word.123', "bedmondson");
+			
+			if($data_base->connect_errno)
+			{
+				printf("Unable to reach server: %s\n", $data_base->connect_error);
+				//add page link here (exit) link
+				exit();
+			}
+	
+			$tableinfoposts = $data_base->query("SELECT * FROM Posts");
+			
+			if($tableinfoposts->num_rows == 0)
+			{
+				echo "No Posts Found";
+				//add main page exit later.
+				exit();
+			}
+			else
+			{
+				echo "Which User's Posts do you want to view?";
+				echo "<form action ='ViewUserPosts.php' method='post'><select name='user'>";
+				$tableinfousers = $data_base->query("SELECT * FROM Users");
+				
+				while($row = mysqli_fetch_array($tableinfousers))
+				{
+					echo "<option value='" . $row['user_id'] . "'>" . $row['user_id'] . "/option>";
+				}
+				
+				echo "</select><br><button type='submit'> View Posts </button>";
+			}
+			
+			echo "</form>";
+			
+			$data_base->close();
+		?>
+	</body>
+</html>
